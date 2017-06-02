@@ -1,0 +1,6 @@
+.gradle/
+build/
+wekarefs/
+weka.iml
+weka.ipr
+weka.iws
