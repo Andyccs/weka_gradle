@@ -1,0 +1,64 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'idea'
+apply plugin: 'jacoco'
+
+sourceCompatibility = 1.8
+mainClassName = "weka.gui.Main"
+
+repositories {
+    maven  {
+        url "http://repo1.maven.org/maven2"
+    }
+}
+
+task compile(type: JavaCompile)
+compile {
+    source = ['src/main/java']
+}
+
+task copyTaskWithPatterns(type: Copy) {
+    from 'src/main/java'
+    into 'src/main/resources'
+    include '**/*.arff'
+    include '**/*.cost'
+    include '**/*.cup'
+    include '**/*.default'
+    include '**/*.excludes'
+    include '**/*.flex'
+    include '**/*.gif'
+    include '**/*.icns'
+    include '**/*.ico'
+    include '**/*.jflex'
+    include '**/*.jpeg'
+    include '**/*.jpg'
+    include '**/*.kfml'
+    include '**/*.matrix'
+    include '**/*.png'
+    include '**/*.properties'
+    include '**/*.props'
+    include '**/*.txt'
+    include '**/*.xml'
+    include '**/DatabaseUtils.props'
+    include 'weka/gui/beans/README'
+}
+
+processResources.dependsOn('copyTaskWithPatterns')
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+    compile 'nz.ac.waikato.cms.weka.thirdparty:java-cup-11b-runtime:2015.03.26'
+    compile 'nz.ac.waikato.cms.weka.thirdparty:java-cup-11b-runtime:2015.03.26'
+    compile 'nz.ac.waikato.cms.weka.thirdparty:bounce:0.18'
+    compile 'org.apache.commons:commons-compress:1.10'
+    compile 'com.googlecode.matrix-toolkits-java:mtj:1.0.4'
+    compile 'net.sourceforge.f2j:arpack_combined_all:0.1'
+    compile 'com.googlecode.netlib-java:netlib-java:1.1'
+}
+
+idea {
+    module {
+        excludeDirs += file('wekarefs')
+        excludeDirs += file('.idea')
+    }
+}
